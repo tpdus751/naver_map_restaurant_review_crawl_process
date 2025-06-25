@@ -172,3 +172,18 @@ if not place_id:
 
 일부 예외적으로 directions 기반 URL(출발 버튼 클릭)이면 다른 방식으로 처리 (directions/14152391.353845,4496650.856792,%EA%B7%B8%EC%88%A0%EC%A7%91,1204959745 => index가 3인 1204959745 placeId 추출)
 
+### 7. 리뷰 탭 URL 접근 및 리뷰 수집 준비
+```python
+review_url = f"https://pcmap.place.naver.com/restaurant/{place_id}/review/visitor"
+driver.switch_to.default_content()
+driver.get(review_url)
+time.sleep(2)
+```
+
+![7-1](https://github.com/user-attachments/assets/23896803-a9a0-4097-84be-31657852b66b)
+
+place_id를 바탕으로 리뷰 전용 URL을 직접 생성
+
+iframe에서 벗어나 새 URL 접근
+
+
