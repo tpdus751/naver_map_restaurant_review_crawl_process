@@ -34,3 +34,10 @@ def crawl_reviews(restaurant_name: str, full_address: str, max_wait_sec=10) -> l
 
 반환값은 리뷰 텍스트 리스트입니다.
 
+### 2. 크롬 드라이버 옵션 설정 및 실행
+```python
+options = webdriver.ChromeOptions()
+options.add_experimental_option("excludeSwitches", ["enable-logging"])
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+```
+로깅 생략 등 옵션을 설정하고, webdriver-manager를 통해 최신 버전의 ChromeDriver를 자동 설치 및 실행합니다.
