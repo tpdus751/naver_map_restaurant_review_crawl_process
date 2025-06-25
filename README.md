@@ -59,7 +59,9 @@ def clean_store_name(name: str) -> str:
         flag = False
     return name
 ```
-괄호 제거, 특수문자 제거, 의미 없는 접미사 "점" 제거(ex. OOO 분당 서현점 -> OOO 분당 서현) 
+괄호 제거, 특수문자 제거, 의미 없는 접미사 "점" 제거(ex. OOO 분당 서현점 -> OOO 분당 서현)
+
+마지막 글자가 "점"이면 flag = False로 설정
 
 ```python
 def clean_address(address: str) -> str:
@@ -69,5 +71,5 @@ def clean_address(address: str) -> str:
     return re.split(r'[,(]', address)[0].strip()
 ```
 
-주소가 성남이 아니거나, 특정 조건이면 비워서 검색 실패를 방지
+flag == False 이면 음식점뒤에 주소를 붙이지 않음 -> 검색 실패를 방지
 
