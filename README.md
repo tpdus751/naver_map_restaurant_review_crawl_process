@@ -75,5 +75,24 @@ flag == False 이면 음식점뒤에 주소를 붙이지 않음 -> 검색 실패
 
 flag == True 라면 예를 들어 음식점 주소가 "성남시 중원구 시민로 66, 101-9호 (중앙동)" 일 경우 (중앙동)을 제외한 "성남시 중원구 시민로 66, 101-9호"를 반환
 
+### 4. 검색어 유효성 검사
+```python
+if len(store_name.split()) < 1:
+    print(f"❌ '{store_name}' → 검색어가 너무 짧아 스킵")
+    return []
+```
+검색 키워드가 비정상적으로 짧으면 바로 함수 종료 -> 다음 음식점 크롤링
+
+### 5. 네이버 지도 검색 페이지 접속 및 searchIframe 진입
+```python
+search_url = f"https://map.naver.com/p/search/{search_keyword}?c=15.00,0,0,0,dh"
+driver.get(search_url)
+time.sleep(2)
+driver.switch_to.frame("searchIframe")
+```
+![5-1](https://github.com/user-attachments/assets/7b8f5efa-7c85-4f31-95cb-3b40ffad178a)
 
 
+네이버 지도에 검색어로 직접 URL 접근
+
+searchIframe으로 전환하여 검색 결과를 읽을 수 있도록 준비
