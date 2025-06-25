@@ -206,3 +206,35 @@ more_click_count = 0
 
 한 번 클릭 시마다 5~10개 정도 리뷰가 추가 로딩됨
 
+### 9. 리뷰 텍스트 추출 후 드라이버 종료, return reiviews
+```python
+# (8) 리뷰 추출
+    review_items = driver.find_elements(By.CSS_SELECTOR, 'li.place_apply_pui.EjjAW')
+    print(f"[{store_name}] 총 수집 리뷰 개수: {len(review_items)}개")
+
+    for i, li in enumerate(review_items, start=1):
+        try:
+            review_text = li.find_element(By.CSS_SELECTOR, 'div.pui__vn15t2 a').text.strip()
+            reviews.append(review_text)
+        except:
+            continue
+
+finally:
+    driver.quit()
+
+return reviews
+```
+각 리뷰 요소에서 텍스트를 추출하여 reviews 리스트에 저장
+
+실패 시 try-except로 무시하고 다음 항목으로 진행
+
+### 10. 최종 반환 예시
+```python
+[
+  "친절하고 양도 많아요. 다시 오고 싶어요!",
+  "맛은 그냥 그랬는데 대기가 너무 길었어요...",
+  "가성비 좋고 위치도 괜찮아요~"
+]
+```
+
+
