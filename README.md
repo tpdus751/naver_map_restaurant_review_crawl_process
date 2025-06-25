@@ -90,9 +90,53 @@ driver.get(search_url)
 time.sleep(2)
 driver.switch_to.frame("searchIframe")
 ```
-![5-1](https://github.com/user-attachments/assets/7b8f5efa-7c85-4f31-95cb-3b40ffad178a)
 
 
 네이버 지도에 검색어로 직접 URL 접근
 
 searchIframe으로 전환하여 검색 결과를 읽을 수 있도록 준비
+
+### 6. 검색 결과 중 '성남' 주소를 가진 항목 탐색
+```python
+results = driver.find_elements(By.CSS_SELECTOR, "li.VLTHu.OW9LQ, li.UEzoS.rTjJo")
+```
+네이버 지도 검색 결과 리스트를 가져옴 (CSS 클래스는 페이지 구조에 따라 다름)
+```python
+target_element = None
+        try:
+            for li in results:
+                try:
+                    addr_el = li.find_element(By.CSS_SELECTOR, "span.lWwyx span.Pb4bU")
+                    address_text = addr_el.text.strip()
+                    if address_text.startswith("성남"):
+                        target_element = li.find_element(By.CSS_SELECTOR, "a._T0lO")
+                        print(f"✅ '{search_keyword}' → 주소 '{address_text}' 선택됨")
+                        break
+                except:
+                    continue
+        except NoSuchElementException:
+            return []
+```
+![5-1](https://github.com/user-attachments/assets/7b8f5efa-7c85-4f31-95cb-3b40ffad178a)
+주소 텍스트가 "성남"으로 시작하는 항목을 찾아 클릭 대상 a 태그를 추출
+```python
+if target_element:
+            driver.execute_script("arguments[0].click();", target_element)
+            time.sleep(2)
+        else:
+            print(f"⚠️ '{search_keyword}' → 성남 주소 검색 결과 없음, 상세페이지로 이동 시도")
+            driver.switch_to.default_content()
+            time.sleep(1)
+            try:
+                entry_iframe = WebDriverWait(driver, 5).until(
+                    EC.presence_of_element_located((By.ID, "entryIframe"))
+                )
+                driver.switch_to.frame(entry_iframe)
+            except Exception as e:
+                print(f"❌ 상세페이지 iframe 진입 실패: {search_keyword}")
+                driver.quit()
+                return []
+```
+대상 element가 존재하면 클릭하여 상세 페이지 진입
+
+없다면 entryIframe을 찾아서 직접 진입 시도 (검색 결과 없이 바로 진입하는 fallback 처리)
