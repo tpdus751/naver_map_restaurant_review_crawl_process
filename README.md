@@ -48,9 +48,26 @@ store_name = clean_store_name(restaurant_name)
 address = clean_address(full_address)
 search_keyword = f"{store_name} {address}"
 ```
-괄호 제거, 특수문자 제거, 의미 없는 접미사("점") 제거
+
+```python
+def clean_store_name(name: str) -> str:
+    global flag
+    name = re.sub(r'\(.*?\)', '', name)  # 괄호 안 제거
+    name = re.sub(r'[^가-힣\d\s]', '', name)  # 한글 + 숫자 + 공백만 허용
+    name = re.sub(r'\s+', ' ', name).strip()
+    if name[-1] == '점':
+        flag = False
+    return name
+```
+괄호 제거, 특수문자 제거, 의미 없는 접미사 "점" 제거(ex. OOO 분당 서현점 -> OOO 분당 서현) 
+
+```python
+def clean_address(address: str) -> str:
+    global flag
+    if not address or flag == False:
+        return ""
+    return re.split(r'[,(]', address)[0].strip()
+```
 
 주소가 성남이 아니거나, 특정 조건이면 비워서 검색 실패를 방지
 
-예)
-입력: "맘스터치 분당서현점" → 전처리: "맘스터치 분당서현"
