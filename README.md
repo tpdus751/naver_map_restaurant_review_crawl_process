@@ -118,7 +118,8 @@ target_element = None
             return []
 ```
 ![5-1](https://github.com/user-attachments/assets/7b8f5efa-7c85-4f31-95cb-3b40ffad178a)</br>
-주소 텍스트가 "성남"으로 시작하는 항목을 찾아 클릭 대상 a 태그를 추출 -> 출발 버튼 클릭 (출발 버튼 클릭시 
+주소 텍스트가 "성남"으로 시작하는 항목을 찾아 클릭 대상 a 태그를 추출 -> 출발 버튼 클릭 (출발 버튼 클릭시 https://map.naver.com/p/directions/14152391.353845,4496650.856792,%EA%B7%B8%EC%88%A0%EC%A7%91,1204959745,PLACE_POI/-/-/transit?c=15.00,0,0,0,dh 와 같은 주소를 얻을 수 있는데,
+이 주소를 후에 처리 예정)
 ```python
 if target_element:
             driver.execute_script("arguments[0].click();", target_element)
@@ -137,7 +138,7 @@ if target_element:
                 driver.quit()
                 return []
 ```
-대상 element가 존재하면 클릭하여 상세 페이지 진입
+대상 element가 존재하면 클릭하여 페이지 진입
 
 없다면 2가지를 확인해야 함.
 
@@ -169,5 +170,5 @@ if not place_id:
 ```
 현재 URL에서 place/1234567890 형식의 숫자만 추출하여 place_id를 확보
 
-일부 예외적으로 directions 기반 URL이면 다른 방식으로 처리
+일부 예외적으로 directions 기반 URL(출발 버튼 클릭)이면 다른 방식으로 처리 (directions/14152391.353845,4496650.856792,%EA%B7%B8%EC%88%A0%EC%A7%91,1204959745 => index가 3인 1204959745 placeId 추출)
 
