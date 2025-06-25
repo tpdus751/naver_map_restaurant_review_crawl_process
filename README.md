@@ -8,7 +8,7 @@
 ## requirements
 필요한 라이브러리 : selenium, webdriver_manager (크롬 브라우저 사전에 설치되어 있어야 함)
 
-## 진행 프로세스 별 상세 코드 설명 및 작동 결과
+## 진행 프로세스 별 상세 코드 설명 및 작동 결과 (CrawlerReview.py)
 ### 0. 전역 설정 및 임포트
 ```python
 from selenium import webdriver
