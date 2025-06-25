@@ -139,4 +139,10 @@ if target_element:
 ```
 대상 element가 존재하면 클릭하여 상세 페이지 진입
 
-없다면 entryIframe을 찾아서 직접 진입 시도 (검색 결과 없이 바로 진입하는 fallback 처리)
+없다면 2가지를 확인해야 함.
+
+1. 정말로 주소가 성남으로 시작하는 음식점이 없는지 : 5초간 기다렸을 때 entryIframe으로 전환되지 않으면 return []
+
+2. 네이버 지도에서 entryIframe을 자동으로 잡아주기 때문 -> 결과가 유일하게 하나만 존재함 : entryIframe으로 전환
+
+
