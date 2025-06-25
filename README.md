@@ -186,4 +186,23 @@ place_id를 바탕으로 리뷰 전용 URL을 직접 생성
 
 iframe에서 벗어나 새 URL 접근
 
+### 8. "더보기" 버튼 최대 20회 클릭 (리뷰 더 가져오기)
+```python
+more_click_count = 0
+    while more_click_count < 20:
+        try:
+            more_btn = driver.find_element(By.CSS_SELECTOR, '.lfH3O > a.fvwqf')
+            more_btn.click()
+            more_click_count += 1
+            print(f"더보기 {more_click_count} 클릭")
+            time.sleep(1)
+        except:
+            break
+```
+
+![8-1](https://github.com/user-attachments/assets/5b2a07c4-9b81-43ee-a5dd-f2354c71538d)
+
+리뷰 더보기 버튼이 존재할 경우 계속 클릭 (최대 20회까지)
+
+한 번 클릭 시마다 5~10개 정도 리뷰가 추가 로딩됨
 
