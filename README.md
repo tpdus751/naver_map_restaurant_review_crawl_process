@@ -117,7 +117,7 @@ target_element = None
         except NoSuchElementException:
             return []
 ```
-![5-1](https://github.com/user-attachments/assets/7b8f5efa-7c85-4f31-95cb-3b40ffad178a)
+![5-1](https://github.com/user-attachments/assets/7b8f5efa-7c85-4f31-95cb-3b40ffad178a)</br>
 주소 텍스트가 "성남"으로 시작하는 항목을 찾아 클릭 대상 a 태그를 추출
 ```python
 if target_element:
