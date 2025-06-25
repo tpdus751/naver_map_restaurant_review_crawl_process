@@ -118,7 +118,7 @@ target_element = None
             return []
 ```
 ![5-1](https://github.com/user-attachments/assets/7b8f5efa-7c85-4f31-95cb-3b40ffad178a)</br>
-주소 텍스트가 "성남"으로 시작하는 항목을 찾아 클릭 대상 a 태그를 추출
+주소 텍스트가 "성남"으로 시작하는 항목을 찾아 클릭 대상 a 태그를 추출 -> 출발 버튼 클릭 (출발 버튼 클릭시 
 ```python
 if target_element:
             driver.execute_script("arguments[0].click();", target_element)
@@ -145,4 +145,29 @@ if target_element:
 
 2. 네이버 지도에서 entryIframe을 자동으로 잡아주기 때문 -> 결과가 유일하게 하나만 존재함 : entryIframe으로 전환
 
+### 6. URL 기반 place_id 추출
+```python
+try:
+    current_url = driver.current_url
+        if 'directions' in current_url:
+            coords = re.search(r'/directions/([^/]+)', current_url).group(1).split(',')
+            if len(coords) >= 4:
+                place_id = coords[3]
+            else:
+                match = re.findall(r"place/(\d+)", current_url)
+                if match:
+                    place_id = match[0]
+except Exception as e:
+    print(f"❌ place_id 추출 실패: {search_keyword} - {e}")
+    driver.quit()
+    return []
+
+if not place_id:
+    print(f"❌ place_id 없음: {search_keyword}")
+    driver.quit()
+    return []
+```
+현재 URL에서 place/1234567890 형식의 숫자만 추출하여 place_id를 확보
+
+일부 예외적으로 directions 기반 URL이면 다른 방식으로 처리
 
