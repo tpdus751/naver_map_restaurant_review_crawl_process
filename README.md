@@ -10,7 +10,7 @@
 
 ## 진행 프로세스 별 상세 코드 설명 및 작동 결과
 ### 0. 전역 설정 및 임포트
-```
+```python
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
