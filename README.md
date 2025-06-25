@@ -25,7 +25,7 @@ flag = True
 Selenium, re, time, webdriver-manager 등 크롤링 필수 패키지 임포트
 
 flag: 전처리 중 주소 무효 처리 여부를 결정하는 전역 변수로 사용됨 (clean_store_name 등에서 활용)
-</br>
+
 ### 1. 함수 : crawl_reviews(restaurant_name, full_address)
 ```python
 def crawl_reviews(restaurant_name: str, full_address: str, max_wait_sec=10) -> list[str]:
@@ -33,7 +33,7 @@ def crawl_reviews(restaurant_name: str, full_address: str, max_wait_sec=10) -> l
 입력으로 음식점 이름과 전체 주소(성남시 음식점 공공 데이터에서 로드)를 받아서 네이버 지도에서 해당 음식점의 방문자 리뷰를 최대한 많이 수집합니다.
 
 반환값은 리뷰 텍스트 리스트입니다.
-</br>
+
 ### 2. 크롬 드라이버 옵션 설정 및 실행
 ```python
 options = webdriver.ChromeOptions()
@@ -41,4 +41,3 @@ options.add_experimental_option("excludeSwitches", ["enable-logging"])
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 ```
 로깅 생략 등 옵션을 설정하고, webdriver-manager를 통해 최신 버전의 ChromeDriver를 자동 설치 및 실행합니다.
-</br>
