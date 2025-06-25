@@ -1,8 +1,31 @@
-# naver_map_restaurant_review_crawl_process
+# 네이버 지도 음식점 리뷰 크롤링 방법 설명
 네이버 지도에서 음식점 리뷰를 크롤링 하는 과정에 대하여 상세하게 다룹니다.
 
 ## 크롤링을 한 이유
 2학년 1학기 웹크롤링실습 강의 기말고사 평가 항목으로 감성분석 모델을 활용하여 웹 프로젝트를 진행하는 "성남시 음식점 리뷰 감성분석 및 분석 웹 서비스" 에 모델 학습을 위한 데이터 준비 과정으로 필요하였고,
 "내돈내픽" 서비스에서 리뷰를 수집하는 과정이 필요하여 두 개의 프로젝트에 맞게 다른 목적으로 크롤링을 진행하게 되었음.
+
+## requirements
+필요한 라이브러리 : selenium, webdriver_manager (크롬 브라우저 사전에 설치되어 있어야 함)
+
+## 진행 프로세스 별 상세 코드 설명 및 작동 결과
+0. 전역 설정 및 임포트
+python
+복사
+편집
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
+from webdriver_manager.chrome import ChromeDriverManager
+import time, re
+
+flag = True
+Selenium, re, time, webdriver-manager 등 크롤링 필수 패키지 임포트
+
+flag: 전처리 중 주소 무효 처리 여부를 결정하는 전역 변수로 사용됨 (clean_store_name 등에서 활용)
+
 
 
