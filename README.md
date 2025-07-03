@@ -238,4 +238,4 @@ return reviews
 ```
 
 ## 크롤링한 리뷰 활용
-"음식점 리뷰 감성분석 모델 학습 과정"의 사전 준비로 리뷰 감성 분석 학습용 입력 데이터 구축을 위한 라벨링 진행과 연결됨.
+["음식점 리뷰 감성분석 모델 학습 과정"](https://github.com/tpdus751/restaurant_review_sentiment_analysis_model)의 사전 준비로 리뷰 감성 분석 학습용 입력 데이터 구축을 위한 라벨링 진행과 연결됨.
